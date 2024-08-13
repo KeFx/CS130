@@ -16,9 +16,8 @@ class MyPoint:
     def get_halfway_point_to(self, target):
         midx = (self.x + target.x)/2
         midy = (self.y + target.y)/2
-        
-        return MyPoint(midx, midy)
 
+        return MyPoint(midx, midy)
 
 class MyFraction:
     def __init__(self, numerator = 0, denominator = 1):
@@ -30,3 +29,10 @@ class MyFraction:
     
     def __str__(self) -> str:
         return f"{self.numerator}/{self.denominator}"
+    
+    def __add__(self, otherFraction):
+        sumNumerator =  (self.numerator * otherFraction.denominator)\
+                      + (otherFraction.numerator * self.denominator)
+        sumDenominator = self.denominator * otherFraction.denominator
+
+        return MyFraction(sumNumerator, sumDenominator)
