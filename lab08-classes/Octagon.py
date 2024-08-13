@@ -31,3 +31,15 @@ class Octagon():
         if not isinstance(otherOctagon, Octagon):
             return False
         return self.side_length == otherOctagon.side_length
+    
+    def __lt__(self, other):
+        return self.side_length < other.side_length
+    
+    def __le__(self, other):
+        return self.side_length <= other.side_length
+    
+    def __gt__(self, other):
+        return self.side_length > other.side_length
+    
+    def __ge__(self, other):
+        return self.side_length >= other.side_length
