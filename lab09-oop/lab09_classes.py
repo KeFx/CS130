@@ -50,16 +50,41 @@ class Block():
             
             return ('\n').join(polygonStringsList)
         
-block1 = Block()
-block1.add_polygon(4, 4.3)
-block1.add_polygon(6, 14)
-block1.add_polygon(3, 2.5)
-print(block1)
-print(type(block1))
-polygon1 = block1.get_polygon(1)
-print(type(polygon1))
-print(polygon1)
-print(block1.get_polygon(0))
-block2 = Block()
-print(block2)
-print(type(block2))
+class Point():
+    def __init__(self, x = 1, y = 1) -> None:
+        self.x = x
+        self.y = y 
+    
+    def __str__(self) -> str:
+        return "({}, {})".format(self.x, self.y)
+    
+    def get_distance(self, other):
+        return ((self.x - other.x)**2 + (self.y - other.y)**2)**(1/2)
+
+class PolyLine():
+    def __init__(self) -> None:
+        self.points = []
+
+    def get_point(self, index):
+        return self.points[index]
+    
+    def add_point(self, x, y):
+        self.points.append(Point(x, y))
+
+    def get_total_length(self):
+        total_dist = 0
+        for idx, point in enumerate(self.points):
+            if idx + 1 < len(self.points):
+                total_dist += point.get_distance(self.points[idx+1])
+
+line1 = PolyLine()
+line1.add_point(10, 20)
+line1.add_point(20, 30)
+line2 = PolyLine();
+line2.add_point(10, 20)
+line2.add_point(20, 30)
+line2.add_point(30, 40)
+print(line1)
+print(line2)
+print("The total length is {:.2f}".format(line1.get_total_length()))
+print("The total length is {:.2f}".format(line2.get_total_length()))
