@@ -65,6 +65,9 @@ class PolyLine():
     def __init__(self) -> None:
         self.points = []
 
+    def __str__(self) -> str:
+        return "->".join([str(point) for point in self.points])
+
     def get_point(self, index):
         return self.points[index]
     
@@ -76,15 +79,25 @@ class PolyLine():
         for idx, point in enumerate(self.points):
             if idx + 1 < len(self.points):
                 total_dist += point.get_distance(self.points[idx+1])
+        return total_dist
+    
+class Rainfall():
+    def __init__(self, location = "UNKOWN") -> None:
+        self.location = location 
+        self.monthly_rainfall_list = []
 
-line1 = PolyLine()
-line1.add_point(10, 20)
-line1.add_point(20, 30)
-line2 = PolyLine();
-line2.add_point(10, 20)
-line2.add_point(20, 30)
-line2.add_point(30, 40)
-print(line1)
-print(line2)
-print("The total length is {:.2f}".format(line1.get_total_length()))
-print("The total length is {:.2f}".format(line2.get_total_length()))
+    def add_rainfall(self, measurement) :
+        self.monthly_rainfall_list.append(measurement)
+
+    def get_annual_rainfall(self):
+        return sum(self.monthly_rainfall_list)
+    
+    def get_average_monthly_rainfall(self):
+        return sum(self.monthly_rainfall_list)/len(self.monthly_rainfall_list)
+    
+    def __str__(self) -> str:
+        if len(self.monthly_rainfall_list) == 0:
+            return f"No rainfall data for {self.location}"
+        else: 
+            return f"Location: {self.location}, Average Monthly Rainfall: \
+                    {self.get_average_monthly_rainfall():.2f} mm"
