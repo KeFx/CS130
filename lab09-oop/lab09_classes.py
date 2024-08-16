@@ -101,3 +101,20 @@ class Rainfall():
         else: 
             return f"Location: {self.location}, Average Monthly Rainfall: \
                     {self.get_average_monthly_rainfall():.2f} mm"
+        
+class RainfallCollection():
+    def __init__(self) -> None:
+        self.rainfall_records = []
+
+    def add_record(self, rainfall_record):
+        if rainfall_record.get_annual_rainfall() > 0:
+            self.rainfall_records.append(rainfall_record) 
+    
+    def get_total_annual_rainfall(self):
+        totalAnnualRainfall = 0
+        for record in self.rainfall_records:
+            totalAnnualRainfall += record.get_annual_rainfall()
+        return totalAnnualRainfall
+    
+    def __str__(self) -> str:
+        return "\n".join([str(rainfall_record) for rainfall_record in self.rainfall_records])
